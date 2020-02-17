@@ -1,0 +1,21 @@
+commands:
+  vote:
+    common:
+      chance: 100
+      commands:
+      - "broadcast %p Thanks for the vote! You received 1 diamonds"
+      - "give %p diamond 1"
+    lucky:
+      chance: 25
+      commands:
+      - "broadcast %p is lucky! He received 10 diamonds!"
+      - "give %p diamond 10"
+    extreme_lucky:
+      chance: 5
+      commands:
+      - "broadcast %p is extemely lucky! He received op!"
+      - "say %p has been opped."
+    too_lucky:
+      chance: 1
+      commands:
+      - "broadcast %p is too lucky! He now owns the server!"
