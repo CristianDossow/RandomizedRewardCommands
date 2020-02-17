@@ -23,14 +23,15 @@ public class SimpleCommand implements CommandExecutor {
 	}
 	
 	public boolean onCommand(CommandSender snd, Command command, String label, String[] args) {
-		
-		String subCmd = args[0].toLowerCase();
+		String subCmd = "";
 		if (!snd.hasPermission("rrc.admin")) {
 			return true;
 		}
 		if (args.length == 0) {
 			sendPluginInfo(snd);
 			return true;
+		} else {
+			subCmd = args[0].toLowerCase();
 		}
 		
 		if(subCmd.equals("execute")) {

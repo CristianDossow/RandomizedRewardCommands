@@ -36,8 +36,9 @@ public class CommandStorage {
 			for (String rewardKey : rcmds.getKeys(false)) {
 				Reward reward = new Reward();
 				reward.setName(rewardKey);
-				reward.setChance(rcmds.getDouble("chance"));
-				reward.setRewardCmds(rcmds.getStringList("commands"));
+				ConfigurationSection rewardConf = rcmds.getConfigurationSection(rewardKey);
+				reward.setChance(rewardConf.getDouble("chance"));
+				reward.setRewardCmds(rewardConf.getStringList("commands"));
 				rewards.add(reward);
 			}
 			rewardcmd.setRewards(rewards);

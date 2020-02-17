@@ -1,7 +1,7 @@
 name: RandomizedRewardCommands
 author: YitanTribal
 description: randomize a list of commands with random chances.
-main: cl.bismuthCode.RandomizedRewardCommands.Main;
+main: cl.bismuthCode.RandomizedRewardCommands.Main
 version: 1
 commands:
    RandomizedRewardCommands:
