@@ -1,21 +1,52 @@
+
+# commands types:
+#   - 0,  "TryAll" try to gets all the rewards by their chances.
+#   - 1,  "ChooseOne" just choose one reward, to work correctly, the sum of chances must be 100.
 commands:
-  vote:
-    common:
-      chance: 100
-      commands:
-      - "broadcast %p Thanks for the vote! You received 1 diamonds"
-      - "give %p diamond 1"
-    lucky:
-      chance: 25
-      commands:
-      - "broadcast %p is lucky! He received 10 diamonds!"
-      - "give %p diamond 10"
-    extreme_lucky:
-      chance: 5
-      commands:
-      - "broadcast %p is extemely lucky! He received op!"
-      - "say %p has been opped."
-    too_lucky:
-      chance: 1
-      commands:
-      - "broadcast %p is too lucky! He now owns the server!"
+  vote: #the command key, any name can be chosed
+    type: 0
+    rewards:
+      common: #the reward name, any name can be chosed
+        chance: 100
+        description: "some descriptive descrption here, its optional"
+        commands:
+        - "broadcast %p Thanks for the vote! You received 1 diamonds"
+        - "give %p diamond 1"
+      lucky:
+        chance: 25
+        commands:
+        - "broadcast %p is lucky! He received 10 diamonds!"
+        - "give %p diamond 10"
+      extreme_lucky:
+        chance: 5
+        commands:
+        - "broadcast %p is extemely lucky! He received op!"
+        - "say %p has been opped."
+      too_lucky:
+        chance: 1
+        commands:
+        - "broadcast %p is too lucky! He now owns the server!"
+  justOne: #the command key, any name can be chosed
+    type: 1
+    rewards:
+      price1: #the reward name, any name can be chosed
+        chance: 25
+        description: "some descriptive descrption here, its optional"
+        commands:
+        - "tellraw %p {\"text\":\"you have too much luck today! - you get 1 diamond!\"}"
+        - "give %p diamond 1"
+      price2:
+        chance: 25
+        commands:
+        - "tellraw %p {\"text\":\"you have too much luck today! - you get 2 diamonds!\"}"
+        - "give %p diamond 2"
+      price3:
+        chance: 25
+        commands:
+        - "tellraw %p {\"text\":\"you have too much luck today! - you get 3 diamonds!\"}"
+        - "give %p diamond 3"
+      price4:
+        chance: 25
+        commands:
+        - "tellraw %p {\"text\":\"you have too much luck today! - you get 4 diamonds!\"}"
+        - "give %p diamond 4"

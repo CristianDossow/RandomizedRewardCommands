@@ -32,13 +32,16 @@ public class CommandStorage {
 			ConfigurationSection rcmds = root.getConfigurationSection(key);
 			RewardCommands rewardcmd = new RewardCommands();
 			rewardcmd.setCommand(key.toLowerCase());
+			rewardcmd.setType(rcmds.getInt("type"));
+			ConfigurationSection rootRewards = rcmds.getConfigurationSection("rewards");
 			List<Reward> rewards = new ArrayList<>(); 
-			for (String rewardKey : rcmds.getKeys(false)) {
+			for (String rewardKey : rootRewards.getKeys(false)) {
 				Reward reward = new Reward();
 				reward.setName(rewardKey);
-				ConfigurationSection rewardConf = rcmds.getConfigurationSection(rewardKey);
+				ConfigurationSection rewardConf = rootRewards.getConfigurationSection(rewardKey);
 				reward.setChance(rewardConf.getDouble("chance"));
 				reward.setRewardCmds(rewardConf.getStringList("commands"));
+				reward.setDescription(rewardConf.getString("description"));
 				rewards.add(reward);
 			}
 			rewardcmd.setRewards(rewards);

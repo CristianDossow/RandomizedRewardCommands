@@ -7,19 +7,22 @@ public class Reward {
 	
 	String name;
 	double chance;
+	String description;
 	List<String> rewardCmds;
 	
 	public Reward() {
 		super();
 		name = "";
 		chance = 0;
+		description = "";
 		rewardCmds = new ArrayList<>();
 	}
 
-	public Reward(String name, double chance, List<String> rewardCmds) {
+	public Reward(String name, double chance, String description, List<String> rewardCmds) {
 		super();
 		this.name = name;
 		this.chance = chance;
+		this.description = description;
 		this.rewardCmds = rewardCmds;
 	}
 
@@ -37,6 +40,13 @@ public class Reward {
 
 	public void setChance(double chance) {
 		this.chance = chance;
+	}
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public List<String> getRewardCmds() {

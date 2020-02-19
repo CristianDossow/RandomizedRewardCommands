@@ -1,5 +1,6 @@
 package cl.bismuthCode.RandomizedRewardCommands;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,12 +11,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import cl.bismuthCode.RandomizedRewardCommands.domain.CommandType;
 import cl.bismuthCode.RandomizedRewardCommands.domain.Reward;
 import cl.bismuthCode.RandomizedRewardCommands.domain.RewardCommands;
 
 public class SimpleCommand implements CommandExecutor {
 	private Main context;
 	Random rand;
+	private static DecimalFormat df2 = new DecimalFormat("#.##");
 
 	public SimpleCommand(Main m) {
 		this.context = m;
@@ -50,20 +53,41 @@ public class SimpleCommand implements CommandExecutor {
 				sendMessage(snd, "Player not found. &c" + args[2]);
 				return true;
 			}
-			for (Reward reward : rewardCmd.getRewards()) {
-				double rvalue = 100D * rand.nextDouble();
-				if(reward.getChance()>rvalue) {
-					sendMessage(snd, "&7Reward executed: "+reward.getName());
-					for(String cmd : reward.getRewardCmds()){
-						String tempCmd = cmd.replaceAll("%p", p.getName());
-						Bukkit.dispatchCommand((CommandSender) Bukkit.getConsoleSender(),tempCmd);
-						if(snd instanceof Player) {
-							sendMessage(snd, "&7 - Command executed: "+tempCmd);
+			if(rewardCmd.getType().equals(CommandType.TRY_ALL)) {
+				for (Reward reward : rewardCmd.getRewards()) {
+					double rvalue = 100D * rand.nextDouble();
+					if(reward.getChance()>rvalue) {
+						sendMessage(snd, "&7Reward executed: "+reward.getName() + " ("+df2.format(reward.getChance())+"%)");
+						for(String cmd : reward.getRewardCmds()){
+							String tempCmd = cmd.replaceAll("%p", p.getName());
+							Bukkit.dispatchCommand((CommandSender) Bukkit.getConsoleSender(),tempCmd);
+							if(snd instanceof Player) {
+								sendMessage(snd, "&7 - Command executed: "+tempCmd);
+							}
 						}
 					}
+					
 				}
-				
+			} else if (rewardCmd.getType().equals(CommandType.CHOOSE_ONE)) {
+				double rvalue = 100D * rand.nextDouble();
+				double chanceBase = 0D;
+				for (Reward reward : rewardCmd.getRewards()) {
+					chanceBase = chanceBase + reward.getChance();
+					if(chanceBase>rvalue) {
+						sendMessage(snd, "&7Reward selected: "+reward.getName() + " ("+df2.format(reward.getChance())+"%)");
+						for(String cmd : reward.getRewardCmds()){
+							String tempCmd = cmd.replaceAll("%p", p.getName());
+							Bukkit.dispatchCommand((CommandSender) Bukkit.getConsoleSender(),tempCmd);
+							if(snd instanceof Player) {
+								sendMessage(snd, "&7 - Command executed: "+tempCmd);
+							}
+						}
+						return true;
+					}
+					
+				}
 			}
+
 			return true;
 		} else if(subCmd.equals("reload")) {
 			this.context.getStorage().reload();
@@ -88,9 +112,10 @@ public class SimpleCommand implements CommandExecutor {
 				sendMessage(snd, "Key Not found. &c" + args[1]);
 				return true;
 			} else {
-				sendMessage(snd, "&7&lCommand Key: " + args[1]);
+				
+				sendMessage(snd, "&7&lCommand Key: " + args[1] + " | type: "+rewardCmd.getType().toString());
 				for(Reward reward : rewardCmd.getRewards()) {
-					sendMessage(snd, "&b&l> &7Reward: "+reward.getName()+" (Chance: "+reward.getChance()+"% )");
+					sendMessage(snd, "&b&l> &7Reward: "+reward.getName()+" (Chance: "+reward.getChance()+"% ) - "+reward.getDescription());
 					sendMessage(snd, "&b&l> &7Commands:");
 					for(String cmd : reward.getRewardCmds()) {
 						sendMessage(snd, "&b&l> - "+cmd);
