@@ -23,7 +23,7 @@ public class CommandStorage {
 		reload();
 	}
 
-	public void reload() { //commit de prueba 1
+	public void reload() { // commit de prueba 2
 		this.m.reloadConfig();
 		FileConfiguration config = this.m.getConfig(); //Commit 1 test
 		this.cmds.clear();
