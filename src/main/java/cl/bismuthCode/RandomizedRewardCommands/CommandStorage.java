@@ -25,7 +25,7 @@ public class CommandStorage {
 
 	public void reload() {
 		this.m.reloadConfig();
-		FileConfiguration config = this.m.getConfig();
+		FileConfiguration config = this.m.getConfig(); //Commit 1 test
 		this.cmds.clear();
 		ConfigurationSection root = config.getConfigurationSection("commands");
 		for (String key : root.getKeys(false)) {
