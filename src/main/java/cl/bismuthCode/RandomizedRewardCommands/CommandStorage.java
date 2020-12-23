@@ -51,7 +51,7 @@ public class CommandStorage {
 
 	public HashMap<String, RewardCommands> getCommands() {
 		return this.cmds;
-	}
+	} // COMMIT FAIL
 
 	public RewardCommands getCommand(String key) {
 		return this.cmds.get(key);
