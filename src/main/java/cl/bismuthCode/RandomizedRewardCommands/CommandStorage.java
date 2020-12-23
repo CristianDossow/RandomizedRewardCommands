@@ -47,7 +47,7 @@ public class CommandStorage {
 			rewardcmd.setRewards(rewards);
 			cmds.put(rewardcmd.getCommand(), rewardcmd);
 		}
-	} //CODIGO QUE SALIO BIEN
+	} //OTRO CAMBIO
 
 	public HashMap<String, RewardCommands> getCommands() {
 		return this.cmds;
