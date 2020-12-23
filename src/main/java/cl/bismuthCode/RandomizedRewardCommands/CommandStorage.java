@@ -21,7 +21,7 @@ public class CommandStorage {
 		this.m.getConfig().options().copyDefaults(true);
 		m.saveConfig();
 		reload();
-	}
+	} //CODIGO QUE DIO ERROR
 
 	public void reload() { // commit de prueba 2
 		this.m.reloadConfig();
