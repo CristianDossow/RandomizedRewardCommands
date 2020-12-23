@@ -55,5 +55,5 @@ public class CommandStorage {
 
 	public RewardCommands getCommand(String key) {
 		return this.cmds.get(key);
-	}
+	} //COMIT MALO
 }
