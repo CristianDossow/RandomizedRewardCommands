@@ -21,7 +21,7 @@ public class CommandStorage {
 		this.m.getConfig().options().copyDefaults(true);
 		m.saveConfig();
 		reload();
-	}
+	} //CODIGO QUE DIO ERROR
 
 	public void reload() { // commit de prueba 2
 		this.m.reloadConfig();
@@ -47,7 +47,7 @@ public class CommandStorage {
 			rewardcmd.setRewards(rewards);
 			cmds.put(rewardcmd.getCommand(), rewardcmd);
 		}
-	}
+	} //CODIGO QUE SALIO BIEN
 
 	public HashMap<String, RewardCommands> getCommands() {
 		return this.cmds;
@@ -55,5 +55,5 @@ public class CommandStorage {
 
 	public RewardCommands getCommand(String key) {
 		return this.cmds.get(key);
-	}
+	} //COMIT MALO
 }
